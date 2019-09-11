@@ -3,8 +3,8 @@
 Python Rest API using Flask framework for play Mastermind Game.
 
 ------
-#### POST /board
-- Create and persist a new Board
+#### POST /game/new
+- Create the new Game
 
 Response:
 
@@ -13,21 +13,21 @@ Body:
 {
     'status': true,
     'data': {
-        'board_id': UUID,
+        'game_id': UUID,
     },
     'errors': null
 }
 ```
 ------
 
-#### POST /codemaker/guess
-- Generate a new secret code on the Board
+#### POST /codemaker/generate_secret_code
+- Generate a new secret code
 
 Request:
 
 Headers:
 ```
-board_id: uuid
+game_id: uuid
 ```
 Body:
 ```
@@ -58,7 +58,7 @@ Request:
 
 Headers:
 ```
-board_id: uuid
+game_id: uuid
 ```
 
 Body:
@@ -91,8 +91,8 @@ Body:
 
 ------
 
-#### GET /board/{board_id}/history
-- Get an attempt history for a given Board
+#### GET /game/{game_id}/history
+- Get an attempt history for a given Game
 
 Response:
 
@@ -113,3 +113,8 @@ Body:
     'errors': null
 }
 ```
+
+## TODO
+- Testing
+- Use Domain Events
+- Use ObjectIds in all object ids
