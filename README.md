@@ -117,6 +117,8 @@ Body:
 ```
 
 ## TODO
+- Finish development
+- Dockerize
 - Testing
 - Use Domain Events
 - Use ObjectIds in all object ids

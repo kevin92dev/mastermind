@@ -19,6 +19,9 @@ class Attempt(object):
         self.occurred_on = datetime.datetime.now()
 
     def get_feedback(self):
+        secret_code = np.array(self.get_secret_code())
+        guess_code = np.array(self.code)
+
         pass
 
     def get_secret_code(self):
