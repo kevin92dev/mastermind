@@ -12,7 +12,7 @@ from flask import Flask, request
 from game.infrastructure.ui.flask.api_response import ApiResponse
 from game.domain.model.game.cannot_save_game_exception import CannotSaveGameException
 from game.domain.model.game.cannot_read_game_exception import CannotReadGameException
-from game.application.service.codemaker.secret_code_creation import SecretCodeCreation
+from game.application.service.codemaker.create_secret_code_use_case import CreateSecretCodeUseCase
 
 JSON_CONTENT_TYPE = 'application/json'
 app = Flask(__name__)
@@ -42,7 +42,7 @@ def create_secret_code():
 
         game_id = str(request.headers.get('game_id'))
 
-        SecretCodeCreation().create(
+        CreateSecretCodeUseCase().create(
             game_id=game_id,
             secret_code=data['secret_code']
         )
@@ -52,6 +52,8 @@ def create_secret_code():
         error_message = e.MESSAGE
     except CannotSaveGameException as e:
         error_message = e.MESSAGE
+    except Exception as e:
+        error_message = str(e)
 
     api_response = ApiResponse(
         status,

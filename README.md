@@ -101,12 +101,14 @@ Body:
 {
     'status': true,
     'data': {
+        'num_of_attempts': 1,
         'attempts': [
             {
                 'guessed': false,
                 'secret_code': [],
                 'attempt_code': [],
-                'feedback': []
+                'feedback': [],
+                'occurred_on': '11/09/2019 00:00:00'
             }
         ]
     },

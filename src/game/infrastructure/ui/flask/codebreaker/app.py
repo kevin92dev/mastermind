@@ -52,6 +52,8 @@ def create_secret_code():
         error_message = e.MESSAGE
     except CannotSaveGameException as e:
         error_message = e.MESSAGE
+    except Exception as e:
+        error_message = str(e)
 
     api_response = ApiResponse(
         status,

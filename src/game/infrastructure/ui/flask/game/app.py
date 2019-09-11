@@ -9,6 +9,7 @@ Copyright 2019
 
 from flask import Flask
 
+from game.application.service.game.get_game_history_use_case import GetGameHistoryUseCase
 from game.infrastructure.ui.flask.api_response import ApiResponse
 from game.application.service.game.create_game_use_case import CreateGameUseCase
 from game.domain.model.game.cannot_read_game_exception import CannotReadGameException
@@ -34,6 +35,30 @@ def create_game():
         status = True
     except CannotSaveGameException as e:
         error_message = e.MESSAGE
+    except CannotReadGameException as e:
+        error_message = e.MESSAGE
+    except Exception as e:
+        error_message = str(e)
+
+    api_response = ApiResponse(
+        status,
+        result_data,
+        error_message
+    )
+
+    return api_response.to_json()
+
+
+@app.route("/game/{game_id}/history", methods=["GET"])
+def game_attempts_history(game_id):
+    status = False
+    result_data = None
+    error_message = None
+
+    try:
+        result_data = GetGameHistoryUseCase().get_history(game_id=game_id)
+
+        status = True
     except CannotReadGameException as e:
         error_message = e.MESSAGE
     except Exception as e:
